@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    --red: #de4332;
+    --green: #27ae60;
+    --yellow: #f1c40f;
+    --blue: #2980b9;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    overflow-x: hidden;
+}
+
+/* Wrapper */
+
+#wrapper {
+    background: radial-gradient(circle, rgba(236, 33, 57, 1) 0%, rgba(147, 41, 30, 1) 100%);
+
+    /* background: radial-gradient(circle, rgba(93, 93, 93, 1) 0%, rgba(49, 49, 49, 1) 100%); */
+
+    height: 100dvh;
+
+    padding: 0 0.5rem;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Counter */
+
+#counter {
+    margin: auto;
+
+    max-width: 1100px;
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    border-radius: 0.5rem;
+
+    padding: 1rem;
+
+    z-index: 1;
+}
+
+#counter h1 {
+    font-size: 4rem;
+    text-align: center;
+
+    color: #fff;
+
+    text-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.8);
+}
+
+#clock {
+    margin-top: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    justify-content: space-around;
+    align-items: center;
+
+    font-size: 3rem;
+
+    text-align: center;
+}
+
+.clock-number {
+    flex: 1 1 100px;
+    min-width: 100px;
+}
+
+.clock-number>div:first-child {
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 0 0.3rem 0.2rem rgba(255, 255, 255, 0.8);
+
+    background: #fff;
+}
+
+.clock-number>div:last-child {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Lights */
+
+.lights {
+    width: 100%;
+
+    display: flex;
+
+    z-index: 1;
+}
+
+.light {
+    position: relative;
+
+    margin: 0 1px;
+
+    aspect-ratio: 1/1;
+
+    width: 100%;
+}
+
+.light::before {
+    position: absolute;
+
+    display: block;
+    content: '';
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 22%;
+    height: 50%;
+
+    margin: auto;
+}
+
+.lights#up>.light::before {
+    top: 0;
+
+    background: linear-gradient(180deg, rgba(49, 49, 49, 1) 0%, rgba(255, 255, 255, 1) 70%);
+}
+
+.lights#down>.light::before {
+    bottom: 0;
+
+    background: linear-gradient(0, rgba(49, 49, 49, 1) 0%, rgba(255, 255, 255, 1) 70%);
+}
+
+.light::after {
+    content: '';
+    display: block;
+
+    --light-color: #fff;
+    background: var(--light-color);
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    aspect-ratio: 1/1;
+    width: 80%;
+
+    border-radius: 50%;
+
+    animation: glow 1.5s infinite;
+}
+
+.light.red::after {
+    --light-color: var(--red);
+
+    animation-delay: 0s;
+}
+
+.light.yellow::after {
+    --light-color: var(--yellow);
+
+    animation-delay: 1s;
+}
+
+.light.green::after {
+    --light-color: var(--green);
+
+    animation-delay: 2s;
+}
+
+.light.blue::after {
+    --light-color: var(--blue);
+
+    animation-delay: 3s;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow: 0 0 0.8rem 0.2rem var(--light-color);
+    }
+}
+
+/* Snowflake */
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1em;
+    will-change: transform;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100dvh);
+    }
+}
+
+/* Footer */
+
+footer {
+    height: 30vh;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 0.5rem;
+
+    /*
+    background: #147d40;
+
+    background: rgb(20, 125, 64);
+    background: linear-gradient(180deg, rgba(20, 125, 64, 1) 0%, rgb(14, 164, 76) 100%); */
+
+    --s: 20px;
+    background: repeating-conic-gradient(from 45deg, #147d40 0 25%, #2e8b57 0 50%);
+    background-size: calc(2 * var(--s)) calc(2 * var(--s));
+}
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
