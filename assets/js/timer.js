@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
+	const countdownWrapper = document.getElementById('countdown');
+	const happyWrapper = document.getElementById('happy');
+	const fireworksWrapper = document.getElementById('fireworks');
+
+	// Help animation to be happy
+	happyWrapper.addEventListener('animationstart', () => {
+		happyWrapper.style.display = 'block';
+		happyWrapper.style.height = 'auto';
+	});
+
 	const days = document.getElementById('days');
 	const hours = document.getElementById('hours');
 	const minutes = document.getElementById('minutes');
@@ -6,12 +16,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function countdown() {
 		const currentDate = new Date();
-		const eventDate = new Date(`${currentDate.getFullYear()}-12-25T00:00:00`);
+		// const eventDate = new Date(`${currentDate.getFullYear()}-12-25T00:00:00`);
+		const eventDate = new Date(
+			`${currentDate.getFullYear()}-12-18T09:44:00`
+		);
 
-		if (eventDate < currentDate) {
-			// TODO:
-			console.log('Christmas has passed!');
+		if (eventDate <= currentDate) {
+			countdownWrapper.classList.add('happy');
+			happyWrapper.classList.add('happy');
+
+			if (((currentDate - eventDate) / 1000) <= 30) {
+				fireworksWrapper.style.display = 'block';
+			} else if (fireworksWrapper.style.display === 'block') {
+				fireworksWrapper.style.display = 'none';
+			}
 			return;
+		}
+
+		if (
+			countdownWrapper.classList.contains('happy') ||
+			happyWrapper.classList.contains('happy')
+		) {
+			countdownWrapper.classList.remove('happy');
+			happyWrapper.classList.remove('happy');
 		}
 
 		const totalSeconds = (eventDate - currentDate) / 1000;
@@ -28,5 +55,5 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	countdown();
-	setInterval(countdown, 1000);
+	setInterval(countdown, 500);
 });
