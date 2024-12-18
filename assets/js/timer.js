@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function countdown() {
 		const currentDate = new Date();
-		// const eventDate = new Date(`${currentDate.getFullYear()}-12-25T00:00:00`);
-		const eventDate = new Date(
-			`${currentDate.getFullYear()}-12-18T09:44:00`
-		);
+		const eventDate = new Date(`${currentDate.getFullYear()}-12-25T00:00:00`);
+		// const eventDate = new Date(
+		// 	`${currentDate.getFullYear()}-12-18T09:44:00`
+		// );
 
 		if (eventDate <= currentDate) {
 			countdownWrapper.classList.add('happy');
