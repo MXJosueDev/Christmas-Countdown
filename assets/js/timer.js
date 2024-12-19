@@ -16,19 +16,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function countdown() {
 		const currentDate = new Date();
-		const eventDate = new Date(`${currentDate.getFullYear()}-12-25T00:00:00`);
+		const eventDate = new Date(
+			`${currentDate.getFullYear()}-12-25T00:00:00`
+		);
 		// const eventDate = new Date(
-		// 	`${currentDate.getFullYear()}-12-18T09:44:00`
+		// 	`${currentDate.getFullYear()}-12-18T21:34:30`
 		// );
 
 		if (eventDate <= currentDate) {
 			countdownWrapper.classList.add('happy');
 			happyWrapper.classList.add('happy');
 
-			if (((currentDate - eventDate) / 1000) <= 30) {
+			if ((currentDate - eventDate) / 1000 <= 30) {
+				fireworksWrapper.onanimationend = () => {};
+				fireworksWrapper.onanimationiteration = () => {};
+
 				fireworksWrapper.style.display = 'block';
 			} else if (fireworksWrapper.style.display === 'block') {
-				fireworksWrapper.style.display = 'none';
+				fireworksWrapper.onanimationiteration = () => {
+					fireworksWrapper.style.display = 'none';
+				};
+				fireworksWrapper.onanimationend = () => {
+					fireworksWrapper.style.display = 'none';
+				};
 			}
 			return;
 		}
